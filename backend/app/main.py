@@ -12,7 +12,11 @@ app = FastAPI(
 # Set all CORS enabled origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://finsight-alpha-liart.vercel.app"],
+    allow_origins=[
+        "http://localhost:3000",
+        "https://finsight-alpha-liart.vercel.app",
+    ],
+    allow_origin_regex=r"https://finsight-.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
