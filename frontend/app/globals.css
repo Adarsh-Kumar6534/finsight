@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 11, 18, 32;
+  --background-end-rgb: 15, 23, 42;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: #0B1220;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Layered Background System */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(20, 184, 166, 0.10) 0%, transparent 40%),
+    radial-gradient(circle at 85% 10%, rgba(59, 130, 246, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(99, 102, 241, 0.06) 0%, transparent 50%);
+  background-size: 200% 200%;
+  animation: gradientShift 30s ease infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* SETTINGS MODULE STYLES */
+
+/* Reduce Motion */
+.reduce-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+.reduce-motion body::before {
+  animation: none;
+  background-position: 50% 50%;
+}
+
+/* Glow Control via CSS Variables */
+:root {
+  --card-shadow-default: 0 15px 50px rgba(0, 0, 0, 0.45);
+  --card-shadow-hover: 0 20px 60px rgba(20, 184, 166, 0.1);
+}
+
+body.theme-glow-enabled {
+  --card-shadow-hover: 0 25px 80px rgba(20, 184, 166, 0.25);
+}
+
+/* Blur Intensity */
+.blur-intensity-low .backdrop-blur-2xl {
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+.blur-intensity-medium .backdrop-blur-2xl {
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+.blur-intensity-high .backdrop-blur-2xl {
+  backdrop-filter: blur(32px) !important;
+  -webkit-backdrop-filter: blur(32px) !important;
+}
